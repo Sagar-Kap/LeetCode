@@ -3,22 +3,25 @@ const isValid = (s) => {
     console.log(false);
     return false;
   }
-  const stack = [];
-  const openBrackets = ["(", "{", "["];
-  const closeBrackets = [")", "}", "]"];
+
+  const final = [];
+
+  const openArr = ["(", "{", "["];
+  const closeArr = [")", "}", "]"];
   for (let i = 0; i < s.length; i++) {
-    if (openBrackets.includes(s[i])) {
-      stack.push(s[i]);
-    } else if (closeBrackets.includes(s[i])) {
-      const lastOpen = stack.pop();
-      if (openBrackets.indexOf(lastOpen) !== closeBrackets.indexOf(s[i])) {
+    if (openArr.includes(s[i])) {
+      final.push(s[i]);
+    } else if (closeArr.includes(s[i])) {
+      const element = final.pop();
+      if (openArr.indexOf(element) !== closeArr.indexOf(s[i])) {
         console.log(false);
         return false;
       }
     }
   }
-  console.log(stack.length === 0);
-  return stack.length === 0;
+
+  console.log(final.length === 0);
+  return final.length === 0;
 };
 
-isValid("{[]}");
+isValid("{([[]}])}");
